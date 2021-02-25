@@ -24,5 +24,27 @@ public class Application {
         System.out.println("user2:" + user2.toString());
 
         System.out.println(user1 == user2);
+
+        System.out.println("\n\n");
+
+
+        testDeepCopy();
+    }
+
+    private static void testDeepCopy() {
+        Address addr = new Address("深圳市");
+        User user1 = new User("xumiao", 24);
+        user1.setAddress(addr);
+        User user2 = (User) user1.deepCopy();
+
+        System.out.println("user1:" + user1.toString());
+        System.out.println("user2:" + user2.toString());
+
+        addr.setAddr("南京");
+
+        System.out.println("user1:" + user1.toString());
+        System.out.println("user2:" + user2.toString());
+
+        System.out.println(user1 == user2);
     }
 }

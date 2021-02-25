@@ -1,6 +1,6 @@
 package org.xumiao.Prototype;
 
-import java.io.Serializable;
+import java.io.*;
 
 public class User implements Cloneable, Serializable {
 
@@ -50,12 +50,24 @@ public class User implements Cloneable, Serializable {
     }
 
     /**
-     * 解决多层引用类型克隆问题深拷贝，序列化
+     * 解决多层引用类型克隆问题深拷贝，序列化，需要实现Serializable接口
      * @return
      */
-//    public User deepCopy() {
-//
-//    }
+    public User deepCopy() {
+        User user = null;
+        try {
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+            objectOutputStream.writeObject(this);
+
+            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+            ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
+            user = (User) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
 
     @Override
     public String toString() {
