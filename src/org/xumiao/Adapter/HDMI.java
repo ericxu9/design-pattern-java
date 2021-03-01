@@ -3,7 +3,7 @@ package org.xumiao.Adapter;
 /**
  * 定义USB接口
  */
-public interface USB {
+public interface HDMI {
 
-    void usbInterface();
+    void hdmiInterface();
 }
